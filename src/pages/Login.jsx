@@ -52,7 +52,7 @@ function Login() {
               SIGNUP
             </NavLink>
           </div>
-          <form className="w-96" onSubmit={handleSubmit}>
+          <form className="" onSubmit={handleSubmit}>
             <FormInput
               name="email"
               label="Email"

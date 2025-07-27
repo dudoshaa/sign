@@ -44,7 +44,7 @@ body,
 }
 
 body{
-    @apply bg-[#9fa52a1b] transition-all font-["Poppins"]
+    @apply bg-[#3a3a361b] transition-all font-["Poppins"]
 }
 
 @layer components {
