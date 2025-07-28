@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  userData: {
-    email: "durdona@gmail.com",
-    password: "123123",
-  },
+  isAuthReady: false,
 };
 
 const userSlice = createSlice({
@@ -13,25 +10,16 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, { payload }) => {
-      const { email, password } = payload;
-      if (
-        state.userData.email === email &&
-        state.userData.password === password
-      ) {
-        state.user = { email, password };
-      } else {
-        state.user = null;
-      }
+      state.user = payload;
     },
-    logOut: (state, { payload }) => {
-      state.user = null;
+    logOut: (state) => {
+      
     },
-    signUp: (state, { payload }) => {
-      const { email, password, confirmPassword, userName } = payload;
-      state.userData = { email, password, userName, confirmPassword };
+    authReady: (state) => {
+      state.isAuthReady = true;
     },
   },
 });
 
-export const { login, logOut, signUp } = userSlice.actions;
+export const { login, logOut, authReady } = userSlice.actions;
 export default userSlice.reducer;

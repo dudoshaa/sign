@@ -3,30 +3,19 @@ import FormInput from "../components/FormInput";
 import { NavLink } from "react-router-dom";
 import { TfiEmail } from "react-icons/tfi";
 import { BsShieldLockFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../app/features/userSlice";
-import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useLogin } from "../hooks/useLogin";
 
 function Login() {
+  const { login, isPending } = useLogin();
   const dispatch = useDispatch();
-  const { userData } = useSelector((store) => store.user);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-
-    if (email === userData.email && password === userData.password) {
-      dispatch(login({ email, password }));
-      toast.success("Welcome!");
-    } else {
-      toast.error("User not found or incorrect password");
-    }
+    login(email, password);
   };
 
   return (
@@ -65,9 +54,19 @@ function Login() {
               type="password"
               icon={BsShieldLockFill}
             />
-            <button className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white">
-              Login
-            </button>
+            {isPending && (
+              <button
+                className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white"
+                disabled
+              >
+                Loading...
+              </button>
+            )}
+            {!isPending && (
+              <button className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white">
+                SignUp
+              </button>
+            )}
           </form>
         </div>
       </div>

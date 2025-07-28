@@ -5,34 +5,26 @@ import { TbUserPlus } from "react-icons/tb";
 import { TfiEmail } from "react-icons/tfi";
 import { BsShieldLockFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { signUp } from "../app/features/userSlice";
+import { useSignup } from "../hooks/useSignup";
 import toast from "react-hot-toast";
 
 function SignUp() {
+  const { signup, isPending } = useSignup();
   const dispatch = useDispatch();
-  const [isSigup, setIsSignup] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const userName = formData.get("userName");
+    const displayName = formData.get("displayName");
     const email = formData.get("email");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
 
-    if (!userName || !email || !password || !confirmPassword) {
-      toast.error("Please fill in all the fields!");
-      return;
-    }
-  
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error("Invalid Password");
       return;
     }
 
-    if (userName && email && password) {
-      dispatch(signUp({ userName, email, password }));
-      setIsSignup(true);
-    }
+    signup(displayName, email, password);
   };
   return (
     <main>
@@ -58,7 +50,7 @@ function SignUp() {
           </div>
           <form className="w-96" onSubmit={handleSubmit}>
             <FormInput
-              name="userName"
+              name="displayName"
               type="text"
               label="User Name"
               icon={TbUserPlus}
@@ -82,11 +74,20 @@ function SignUp() {
               icon={BsShieldLockFill}
             />
 
-            <button className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white">
-              SignUp
-            </button>
+            {isPending && (
+              <button
+                className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white"
+                disabled
+              >
+                Loading...
+              </button>
+            )}
+            {!isPending && (
+              <button className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white">
+                SignUp
+              </button>
+            )}
           </form>
-          {isSigup && <Navigate to="/login" />}
         </div>
       </div>
     </main>
