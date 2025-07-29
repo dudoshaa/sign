@@ -10,7 +10,7 @@ import { Contact, Home, Login, Profile, SignUp, SingleImage } from "./pages";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
-import { login, authReady } from "./app/features/userSlice";
+import { logIn, authReady } from "./app/features/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function App() {
     { path: "/signUp", element: user ? <Navigate to="/" /> : <SignUp /> },
   ]);
   onAuthStateChanged(auth, (user) => {
-    dispatch(login(user));
+    dispatch(logIn(user));
     dispatch(authReady());
   });
   return <>{isAuthReady && <RouterProvider router={routes} />}</>;

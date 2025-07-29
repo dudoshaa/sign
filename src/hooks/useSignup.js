@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/config";
-import { login } from "../app/features/userSlice";
+import { logIn } from "../app/features/userSlice";
 import toast from "react-hot-toast";
 
 export const useSignup = () => {
@@ -22,7 +22,7 @@ export const useSignup = () => {
         photoURL:
           "https://api.dicebear.com/9.x/initials/svg?seed=" + displayName,
       });
-      dispatch(login(req.user));
+      dispatch(logIn(req.user));
       toast.success(`Welcome ${auth.currentUser.displayName}`);
     } catch (error) {
       toast.error(error.message);
