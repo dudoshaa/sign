@@ -24,7 +24,7 @@ function OnlineUsers() {
               />
             </div>
 
-            {/* User info – hidden on small screens */}
+            
             <div className="hidden sm:block">
               <h3 className="font-semibold">{user.displayName}</h3>
               <p className="text-sm">{user.email}</p>
