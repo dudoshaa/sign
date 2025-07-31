@@ -1,26 +1,31 @@
 import { useState } from "react";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import { useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 
-import { logIn } from "../app/features/userSlice"; 
+import { logIn } from "../app/features/userSlice";
+import { doc, updateDoc } from "firebase/firestore";
 
 export const useLogin = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const login = async (email, password) => {
     setIsPending(true);
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-      if (!user) {
+      const req = await signInWithEmailAndPassword(auth, email, password);
+
+      if (!req.user) {
         throw new Error("User not found");
       }
-      dispatch(logIn(user));
-      setUser(user);
-      toast.success(`Welcome ${user.displayName}`);
+      const user = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(user, {
+        online: true,
+      });
+      dispatch(logIn(req.user));
+
+      toast.success(`Welcome back, ${auth.currentUser.displayName}`);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -28,5 +33,5 @@ export const useLogin = () => {
     }
   };
 
-  return { user, isPending, login };
+  return { isPending, login };
 };

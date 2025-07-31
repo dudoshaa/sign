@@ -30,13 +30,13 @@ function Login() {
           <div className="mx-14 flex gap-5 text-2xl mb-4">
             <NavLink
               to="/login"
-              className="text-white py-3 px-3 rounded-4xl  lg:text-black "
+              className=" py-3 px-3 rounded-4xl text-yellow-500 "
             >
               LOGIN
             </NavLink>
             <NavLink
               to="/signUp"
-              className=" py-3 px-3 rounded-4xl  text-white lg:text-black hover:bg-black/10"
+              className="py-3 px-3 rounded-4xl text-yellow-500 "
             >
               SIGNUP
             </NavLink>
@@ -56,15 +56,15 @@ function Login() {
             />
             {isPending && (
               <button
-                className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white"
+                className="mt-5 mx-28 btn bg-black rounded-3xl text-white"
                 disabled
               >
                 Loading...
               </button>
             )}
             {!isPending && (
-              <button className="mt-5 mx-28 btn bg-amber-600 rounded-3xl text-white">
-                SignUp
+              <button className="mt-5 mx-28 btn bg-black rounded-3xl text-white">
+                Login
               </button>
             )}
           </form>

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -9,11 +9,14 @@ const firebaseConfig = {
   projectId: "durdona-project",
   storageBucket: "durdona-project.firebasestorage.app",
   messagingSenderId: "952663848654",
-  appId: "1:952663848654:web:3c2d76c2304b8e1d0f029f"
+  appId: "1:952663848654:web:3c2d76c2304b8e1d0f029f",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 //Auth
-export const auth=getAuth()
+export const auth = getAuth();
+
+//db
+export const db = getFirestore();
