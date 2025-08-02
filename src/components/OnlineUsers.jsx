@@ -28,24 +28,26 @@ function OnlineUsers() {
             users.map((user) => {
               return (
                 <li key={user.id} className="flex items-center gap-4 mx-2 mb-4">
-                  <div className="relative w-14 h-14">
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16">
                     <img
                       className="rounded-full w-full h-full object-cover"
                       src={user.photoURL}
                       alt="avatar"
                     />
                     <TbSquareRoundedFilled
-                      className={`absolute top-10.5 right-1 ${
+                      className={`absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ${
                         user.online ? "text-green-500" : "text-gray-500"
                       }`}
-                      size={16}
-                      s
                     />
                   </div>
 
-                  <div className="hidden sm:block">
-                    <h3 className="font-semibold">{user.displayName}</h3>
-                    <p className="text-sm">{user.email}</p>
+                  <div className="text-xs sm:text-sm md:text-base lg:text-lg">
+                    <h3 className="font-semibold truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
+                      {user.displayName}
+                    </h3>
+                    <p className="text-[10px] sm:text-xs md:text-sm truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
+                      {user.email}
+                    </p>
                   </div>
                 </li>
               );
