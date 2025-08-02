@@ -45,9 +45,6 @@ function OnlineUsers() {
                     <h3 className="font-semibold truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
                       {user.displayName}
                     </h3>
-                    <p className="text-[10px] sm:text-xs md:text-sm truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
-                      {user.email}
-                    </p>
                   </div>
                 </li>
               );
