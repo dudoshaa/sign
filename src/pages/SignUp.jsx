@@ -48,7 +48,10 @@ function SignUp() {
               SIGNUP
             </NavLink>
           </div>
-          <form className="w-96" onSubmit={handleSubmit}>
+          <form
+            className="w-[90vw] max-w-md px-4 sm:px-8"
+            onSubmit={handleSubmit}
+          >
             <FormInput
               name="displayName"
               type="text"
@@ -74,17 +77,16 @@ function SignUp() {
               icon={BsShieldLockFill}
             />
 
-            {isPending && (
+            {isPending ? (
               <button
-                className="mt-5 mx-28 btn bg-black rounded-3xl text-white"
+                className="mt-5 w-full btn bg-black rounded-3xl text-white py-2"
                 disabled
               >
                 Loading...
               </button>
-            )}
-            {!isPending && (
-              <button className="mt-5 mx-28 btn bg-black rounded-3xl text-white">
-                SignUp
+            ) : (
+              <button className="mt-5 w-full btn bg-black rounded-3xl text-white py-2">
+                Sign Up
               </button>
             )}
           </form>
