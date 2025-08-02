@@ -15,7 +15,6 @@ export const useLogin = () => {
     setIsPending(true);
     try {
       const req = await signInWithEmailAndPassword(auth, email, password);
-
       if (!req.user) {
         throw new Error("User not found");
       }

@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/config";
 import { logIn } from "../app/features/userSlice";
 import toast from "react-hot-toast";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
@@ -28,6 +28,7 @@ export const useSignup = () => {
         online: true,
         displayName: auth.currentUser.displayName,
         photoURL: auth.currentUser.photoURL,
+        email: auth.currentUser.email,
       });
 
       dispatch(logIn(req.user));
