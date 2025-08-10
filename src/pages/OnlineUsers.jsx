@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { TbSquareRoundedFilled } from "react-icons/tb";
 import { useCollection } from "../hooks/useCollection";
+import { formatLastSeen } from "../utils";
+const fiveMinutesAgo = new Date(Date.now - 5 * 60 * 1000);
+console.log(formatLastSeen(fiveMinutesAgo));
 
 function OnlineUsers() {
   const { data: users } = useCollection("users");
@@ -21,6 +24,7 @@ function OnlineUsers() {
                       src={user.photoURL}
                       alt="avatar"
                     />
+
                     <TbSquareRoundedFilled
                       className={`absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ${
                         user.online ? "text-green-500" : "text-gray-500"
@@ -32,7 +36,9 @@ function OnlineUsers() {
                     <h3 className="font-semibold truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px]">
                       {user.displayName}
                     </h3>
-                    <p className="text-gray-500 text-xs"></p>
+                    <p className="text-gray-500 text-xs">
+                      {!user.online ? formatLastSeen(user.lastSeen) : "online"}
+                    </p>
                   </div>
                 </li>
               );

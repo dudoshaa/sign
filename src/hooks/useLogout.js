@@ -18,6 +18,7 @@ export const useLogout = () => {
 
       await updateDoc(user, {
         online: false,
+        lastSeen: new Date(),
       });
       await signOut(auth);
       dispatch(logOut());
